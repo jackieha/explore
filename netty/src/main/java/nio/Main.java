@@ -7,6 +7,10 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.LockSupport;
 
 /**
  * @author shuaifeng.gao
@@ -14,12 +18,32 @@ import java.util.Enumeration;
  **/
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
         byte[] a = {1,2,3,4};
 
 //        dirAllocate();
 //        heapAllocate();
-        networkInterface();
+//        networkInterface();
+        CompletableFuture cf = new CompletableFuture();
+        cf.orTimeout(1, TimeUnit.SECONDS);
+        cf.whenComplete((o, t) -> System.out.println(t));
+        System.out.println(cf.isDone());
+
+        LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(10));
+        System.out.println("ed");
+//
+//        System.out.println(cf.isDone());
+//        CompletableFuture copyCf = cf.copy();
+//        System.out.println(copyCf.isDone());
+//
+//        cf.complete("abc");
+//        System.out.println(cf.isDone());
+//        System.out.println(copyCf.isDone());
+
+
+
+//        cf.complete("abc");
+//        System.out.println(cf.get());
     }
 
     private static void dirAllocate(){

@@ -7,6 +7,10 @@
     <groupId>com.gsf</groupId>
     <artifactId>jvm</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <java.version>1.8</java.version>
+        <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+    </properties>
 
     <dependencies>
         <dependency>
